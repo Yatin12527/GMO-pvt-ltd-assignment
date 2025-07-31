@@ -53,14 +53,25 @@ export default function PaginatorBasicDemo() {
 
   const customSelect = async (num: number) => {
     const temp: Artwork[] = [];
-    let range = Math.floor(num / rows) + 1;
+    const range = Math.ceil(num / rows);
+    const promises = [];
     for (let i = 1; i <= range; i++) {
-      const res = await axios.get(`${BASE}/artworks?page=${i}`);
-      temp.push(...res.data.data);
+      promises.push(axios.get(`${BASE}/artworks?page=${i}`));
     }
-    const finalData = temp.slice(0, num);
-    setSelectedArtworks(finalData);
-    console.log(finalData);
+    try {
+      setLoading(true);
+      const responses = await Promise.all(promises);
+      responses.forEach((response) => {
+        temp.push(...response.data.data);
+      });
+      const finalData = temp.slice(0, num);
+      setSelectedArtworks(finalData);
+      console.log(finalData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
