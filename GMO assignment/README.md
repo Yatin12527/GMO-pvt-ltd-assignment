@@ -1,60 +1,86 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + PrimeReact
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This template provides a minimal setup to get React working in Vite with HMR, TypeScript, ESLint, and PrimeReact components.
 
-Currently, two official plugins are available:
+## Assignment
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Submitted to:** GrowMeOrganic Private Limited
+**Submitted by:** Yatinder Kumar
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This project uses [Vite](https://vitejs.dev/) for fast development and build tooling.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Start the Dev Server
+
+```bash
+npm run dev
+```
+
+---
+
+## PrimeReact Installation
+
+Install the required PrimeReact packages and styles:
+
+```bash
+npm install primereact primeicons
+```
+
+Add theme and core styles in your `main.tsx` or `index.tsx`:
+
+```tsx
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; // Or any other theme
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+```
+
+You can now import and use PrimeReact components like:
+
+```tsx
+import { Button } from 'primereact/button';
+```
+
+---
+
+## ESLint Setup
+
+This setup includes ESLint with TypeScript type-aware rules and React linting plugins.
+
+Install ESLint & dependencies:
+
+```bash
+npm install -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y
+```
+
+### `eslint.config.js`
+
+Using the `eslint-plugin-react-x`, `eslint-plugin-react-dom`, and type-checked configuration from `@typescript-eslint/eslint-plugin`:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import tseslint from 'typescript-eslint';
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default tseslint.config([
-  globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['dist'],
     extends: [
-      // Other configs...
-      // Enable lint rules for React
+      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
       reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
       reactDom.configs.recommended,
     ],
     languageOptions: {
@@ -62,8 +88,10 @@ export default tseslint.config([
         project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
-      // other options...
     },
   },
-])
+]);
 ```
+
+---
+
