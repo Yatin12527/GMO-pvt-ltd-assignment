@@ -1,12 +1,3 @@
-Here’s your updated **project documentation** with:
-
-* Basic React + Vite setup
-* ESLint configuration
-* React Prime (PrimeReact) installation
-* Assignment info for *GrowMeOrganic Private Limited*, submitted by *Yatinder Kumar*
-
----
-
 # React + TypeScript + Vite + PrimeReact
 
 This template provides a minimal setup to get React working in Vite with HMR, TypeScript, ESLint, and PrimeReact components.
